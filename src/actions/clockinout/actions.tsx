@@ -7,15 +7,17 @@ import { ClockInOutEntry } from "@/lib/interface";
 
 export async function submitEntryAction(formData: FormData) {
   const name = formData.get("name") as string;
-
+  const status = formData.get("status") as string;
+  
   const entry: ClockInOutEntry = {
-    name: name
+    name: name,
+    status: status,
   };
 
   const supabase = createClient();
 
   const { error: supabaseError } = await supabase
-    .from('entry')
+    .from('entry-with-status')
     .insert([entry]);
 
   if (supabaseError) {

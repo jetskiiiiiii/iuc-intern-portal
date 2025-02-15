@@ -1,13 +1,11 @@
+// components/clockinoutform/status.tsx
+
 "use client"
 
 import { Button } from "@/components/ui/button"
 
-export default function ClockInOutButton() {
+export default function clockInOutStatus() {
   return (
-    <Button
-          n type="submit" className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-          Submit
-        </button>
-
+    
   )
 }
