@@ -12,14 +12,15 @@ export async function submitEntryAction(formData: FormData) {
   const entry: ClockInOutEntry = {
     name: name,
     status: status,
-  };
+  }; // only include columns which will be explicitly added
 
   const supabase = createClient();
 
   const { error: supabaseError } = await supabase
-    .from('entry-with-status')
+    .from('entry-with-status') // name of table in Supabase
     .insert([entry]);
 
+  //  TODO: implement a better error handling system
   if (supabaseError) {
     throw supabaseError;
   } else {

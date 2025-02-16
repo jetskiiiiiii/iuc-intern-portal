@@ -2,7 +2,7 @@
 
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 
 import { submitEntryAction } from "@/actions/clockinout/actions";
@@ -10,10 +10,7 @@ import { submitEntryAction } from "@/actions/clockinout/actions";
 export default function ClockInOutForm() {
   const [ name, setName ] = useState<string>('');
   const [ statusClockIn, setStatusClockIn ] = useState<string | null>(null);
-  const [ statusClockOut, setStatusClockOut ] = useState<string | null>(null);
-
   const [ error, setError ] = useState<string | null>(null);
-  const [ success, setSuccess ] = useState<string | null>(null);
 
   const handleSubmit = async (formData: FormData) => {
     const error = await submitEntryAction(formData);
@@ -21,12 +18,23 @@ export default function ClockInOutForm() {
     if (error) {
       setError(error);
     } else {
-      setSuccess(statusClockIn ? 'Clocked in.' : 'Clocked out.');
+      setError(statusClockIn ? 'Clocked in.' : 'Clocked out.');
       setStatusClockIn(null);
-      setStatusClockOut(null);
       setName('');
     }
   };
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setError(null);
+    }, 2000);
+
+    return () => {
+      if (timer) {
+        clearTimeout(timer);
+      }
+    }; 
+  })
 
   return (
     <div>
@@ -64,7 +72,6 @@ export default function ClockInOutForm() {
               id="status_clock_out"
               name="status"
               value="clock-out"
-              onChange={(e) => setStatusClockOut(e.target.value)}
               className="mr-2"/>
             <label htmlFor="status_clock_out">Clock Out</label>
           </div>
@@ -78,8 +85,9 @@ export default function ClockInOutForm() {
 
       </form>
 
-      {error && <p className="text-red-500">{error}</p>}
-      {success && <p className="text-green-500">{success}</p>}
+      <div className="confirmation-message-container min-h-10">
+        {error && <p className="text-black-500">{error}</p>}
+      </div>
     </div>
   )
 }
