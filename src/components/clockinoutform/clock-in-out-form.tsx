@@ -10,23 +10,24 @@ import { submitEntryAction } from "@/actions/clockinout/actions";
 export default function ClockInOutForm() {
   const [ name, setName ] = useState<string>('');
   const [ statusClockIn, setStatusClockIn ] = useState<string | null>(null);
-  const [ error, setError ] = useState<string | null>(null);
+  const [ confirmation, setConfirmation ] = useState<string | null>(null);
 
   const handleSubmit = async (formData: FormData) => {
     const error = await submitEntryAction(formData);
 
     if (error) {
-      setError(error);
+      setConfirmation(error);
     } else {
-      setError(statusClockIn ? 'Clocked in.' : 'Clocked out.');
+      setConfirmation(statusClockIn ? 'Clocked in.' : 'Clocked out.');
       setStatusClockIn(null);
       setName('');
     }
   };
 
+  // confirmation message timer
   useEffect(() => {
     const timer = setTimeout(() => {
-      setError(null);
+      setConfirmation(null);
     }, 2000);
 
     return () => {
@@ -62,7 +63,8 @@ export default function ClockInOutForm() {
               name="status"
               value="clock-in"
               onChange={(e) => setStatusClockIn(e.target.value)}
-              className="mr-2 mt-2"/>
+              className="mr-2 mt-2"
+              required/>
             <label htmlFor="status_clock_in">Clock In</label>
           </div>
 
@@ -86,7 +88,7 @@ export default function ClockInOutForm() {
       </form>
 
       <div className="confirmation-message-container min-h-10">
-        {error && <p className="text-black-500">{error}</p>}
+        {confirmation && <p className="text-black-500">{confirmation}</p>}
       </div>
     </div>
   )
