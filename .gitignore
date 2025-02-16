@@ -6,4 +6,3 @@ example-app/
 public/
 src/app/error.tsx
 src/app/favicon.ico
-src/app/globals.css
