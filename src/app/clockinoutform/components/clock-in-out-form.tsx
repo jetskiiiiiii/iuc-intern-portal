@@ -5,7 +5,8 @@
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 
-import { submitEntryAction } from "@/actions/clockinout/actions";
+import { submitEntryAction } from "../actions/actions";
+import styles from "./clock-in-out-status-radio-buttons.module.css"
 
 export default function ClockInOutForm() {
   const [ name, setName ] = useState<string>('');
@@ -55,7 +56,7 @@ export default function ClockInOutForm() {
             required/>
         </div>
 
-        <div id="statusButtons" className="w-full">
+        <div id="statusButtons" className={styles['status-radio-container']}> 
           <div className="w-full">
             <input
               type="radio"
@@ -63,9 +64,13 @@ export default function ClockInOutForm() {
               name="status"
               value="clock-in"
               onChange={(e) => setStatusClockIn(e.target.value)}
-              className="mr-2 mt-2"
+              className={styles['status-radio']}
               required/>
-            <label htmlFor="status_clock_in">Clock In</label>
+            <label
+              htmlFor="status_clock_in"
+              className={styles['status-radio-label']}>
+              Clock In
+            </label>
           </div>
 
           <div className="w-full">
@@ -74,8 +79,12 @@ export default function ClockInOutForm() {
               id="status_clock_out"
               name="status"
               value="clock-out"
-              className="mr-2"/>
-            <label htmlFor="status_clock_out">Clock Out</label>
+              className={styles['status-radio']}/>
+            <label
+              htmlFor="status_clock_out"
+              className={styles['status-radio-label']}>
+              Clock Out
+            </label>
           </div>
         </div>
 
@@ -87,7 +96,7 @@ export default function ClockInOutForm() {
 
       </form>
 
-      <div className="confirmation-message-container min-h-10">
+      <div className="min-h-10">
         {confirmation && <p className="text-black-500">{confirmation}</p>}
       </div>
     </div>
