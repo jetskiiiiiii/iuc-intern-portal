@@ -7,7 +7,6 @@ import { Button } from "@/components/ui/button";
 
 import { submitEntryAction } from "../actions/clock-in-out-form-actions";
 import styles from "../ui/clock-in-out-form.module.css";
-import iuc_theme_styles from "@/components/ui/iuc-intern-portal.module.css";
 
 export default function ClockInOutForm() {
   const [ name, setName ] = useState<string>('');
