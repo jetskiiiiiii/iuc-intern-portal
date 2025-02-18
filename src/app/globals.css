@@ -2,8 +2,24 @@
 @tailwind components;
 @tailwind utilities;
 
+/* using html selector for custom properties */
+/*
+* pink: #CB8589;
+* blak: #343434;
+* blue: #2F3061;
+* yellow: #FFE66D;
+* green: #7E8D85;
+*/
+html {
+  --iuc-pink: hsl(357, 40%, 66%);
+  --iuc-black: hsl(0, 0%, 20%);
+  --iuc-blue: hsl(239, 35%, 28%);
+  --iuc-yellow: hsl(50, 100%, 71%);
+  --iuc-green: hsl(148, 6%, 52%);
+}
+
 body {
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--iuc-green);
 }
 
 @layer base {
@@ -14,7 +30,7 @@ body {
     --card-foreground: 20 14.3% 4.1%;
     --popover: 0 0% 100%;
     --popover-foreground: 20 14.3% 4.1%;
-    --primary: 24 9.8% 10%;
+    --primary: 30 6.3% 25.1%;
     --primary-foreground: 60 9.1% 97.8%;
     --secondary: 60 4.8% 95.9%;
     --secondary-foreground: 24 9.8% 10%;

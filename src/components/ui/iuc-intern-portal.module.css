@@ -1,0 +1,14 @@
+.iuc-intern-portal-header {
+  position: fixed; /* Stays at the top */
+  top: 0; /* Align to the top of the viewport */
+  left: 0;
+  width: 100%; /* Full width */
+  padding-left: 0.8rem;
+  line-height: 8rem;
+  z-index: 100; /* Ensure it's above other content */
+  font-size: 8rem;
+  font-weight: 500;
+  font-stretch:ultra-expanded;
+  color: var(--iuc-black);
+}
+
