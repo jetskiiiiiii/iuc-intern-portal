@@ -50,6 +50,7 @@ export default {
   				'4': 'hsl(var(--chart-4))',
   				'5': 'hsl(var(--chart-5))'
   			},
+      },
 /*
         'iuc-pink': 'var(--iuc-pink)',
         'iuc-black': 'var(--iuc-black)',
@@ -57,7 +58,6 @@ export default {
         'iuc-yellow': 'var(--iuc-yellow)',
         'iuc-green': 'var(--iuc-green)',
 */
-  		},
   		borderRadius: {
   			lg: 'var(--radius)',
   			md: 'calc(var(--radius) - 2px)',
