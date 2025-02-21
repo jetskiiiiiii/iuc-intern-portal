@@ -51,6 +51,12 @@ export default {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
+
+        'iuc-pink': 'var(--iuc-pink)',
+        'iuc-black': 'var(--iuc-black)',
+        'iuc-blue': 'var(--iuc-blue)',
+        'iuc-yellow': 'var(--iuc-yellow)',
+        'iuc-green': 'var(--iuc-green)',
       },
       borderRadius: {
         lg: "var(--radius)",
