@@ -1,8 +1,0 @@
-.env.local
-.next/
-node_modules/
-basic-html-css-js/
-example-app/
-public/
-src/app/error.tsx
-src/app/favicon.ico
