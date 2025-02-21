@@ -1,38 +1,5 @@
 /* /components/clockinoutform/clock-in-out-form.module.css */
 
-/* radio buttons for status */
-.status-radio-container { /* Container for styling */
-  position: relative; /* Needed for absolute positioning of the input */
-  display: inline-block; /* Treat as inline element */
-}
-
-.status-radio {
-  opacity: 0;
-  position: fixed;
-  width: 0;
-}
-  
 .status-radio-label { /* The styled button element */
-  padding: 15px 20px;
-  border: 2px solid rounded var(--iuc-green);
-  border-radius: 10px;
-  font-size: 16px;
-  text-align: center;
   transition: border-color 0.3s, background-color 0.3s;
-  display: flex; /* Use flexbox for vertical centering */
-  align-items: center; /* Vertically center the text */
-  justify-content: center; /* Horizontally center the text */
-  width: 100%;
-  height: 100%;
 }
-  
-.status-radio:checked + .status-radio-label { /* Style the button when checked */
-  background-color: var(--iuc-yellow);
-}
-
-.status-radio:focus + .status-radio-label {
-  outline: none;
-  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
-}
-
-/* TODO: submit button */

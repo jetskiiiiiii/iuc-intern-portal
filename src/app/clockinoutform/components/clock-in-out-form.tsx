@@ -6,7 +6,7 @@ import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 
 import { submitEntryAction } from "../actions/clock-in-out-form-actions";
-import styles from "../ui/clock-in-out-form.module.css";
+import clock_in_out_form_styles from "../ui/clock-in-out-form.module.css";
 
 export default function ClockInOutForm() {
   const [ name, setName ] = useState<string>('');
@@ -40,11 +40,12 @@ export default function ClockInOutForm() {
 
   return (
     <div>
+
       <form 
-        className="w-full outline-none items-center gap-2"
         action={async (formData) => {
           await handleSubmit(formData);}}>
-        <div id="nameField">
+
+        <div id="name-field" className="w-full">
           <input
             type="text"
             id="name"
@@ -56,48 +57,48 @@ export default function ClockInOutForm() {
             required/>
         </div>
 
-        <div id="statusButtons" className={styles['status-radio-container']}> 
-          <div className="w-full">
+        <div id="status-buttons" className="flex h-[70vh]"> 
+          <div id="clock-in-button" className="w-full p-2">
             <input
               type="radio"
               id="status_clock_in"
               name="status"
               value="clock-in"
               onChange={(e) => setStatusClockIn(e.target.value)}
-              className={styles['status-radio']}
+              className="peer opacity-0 fixed w-0"
               required/>
             <label
               htmlFor="status_clock_in"
-              className={styles['status-radio-label']}>
+              className={`${clock_in_out_form_styles['status-radio-label']} p-[8rem] border-0 rounded-lg border-iuc-green text-5xl text-center flex items-center bg-iuc-blue justify-center w-full h-full peer-checked:bg-iuc-yellow`}> 
               Clock In
             </label>
           </div>
 
-          <div className="w-full">
+          <div id="clock-out-button" className="w-full p-2">
             <input
               type="radio"
               id="status_clock_out"
               name="status"
               value="clock-out"
-              className={styles['status-radio']}/>
+              className="peer opacity-0 fixed w-0"/>
             <label
               htmlFor="status_clock_out"
-              className={styles['status-radio-label']}>
+              className={`${clock_in_out_form_styles['status-radio-label']} p-[8rem] border-0 rounded-lg border-iuc-green text-5xl text-center flex items-center bg-iuc-blue justify-center w-full h-full peer-checked:bg-iuc-yellow`}> 
               Clock Out
             </label>
           </div>
         </div>
 
-        <div id="submitButton">
-         <Button type="submit" className="w-full font-bold py-4 px-4 my-2 rounded">
+        <div id="submit-button">
+         <Button type="submit" className="h-[3rem] w-full font-bold rounded">
            Submit
          </Button>
         </div>
 
       </form>
 
-      <div className="min-h-10">
-        {confirmation && <p className="text-black-500">{confirmation}</p>}
+      <div>
+        {confirmation && <p className="h-[10vh]">{confirmation}</p>}
       </div>
     </div>
   )
