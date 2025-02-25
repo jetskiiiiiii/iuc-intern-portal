@@ -57,7 +57,7 @@ export default function ClockInOutForm() {
         </div>
 
         <div id="status-buttons" className="flex h-[70vh]"> 
-          <div id="clock-in-button" className="w-full p-2">
+          <div id="clock-in-button" className="w-full p-4">
             <input
               type="radio"
               id="status_clock_in"
@@ -68,12 +68,12 @@ export default function ClockInOutForm() {
               required/>
             <label
               htmlFor="status_clock_in"
-              className={`${clock_in_out_form_styles['status-radio-label']} p-[8rem] border-0 rounded-lg border-iuc-green text-5xl text-center flex items-center bg-iuc-blue justify-center w-full h-full peer-checked:bg-iuc-yellow`}> 
+              className={`${clock_in_out_form_styles['status-radio-label']} btn w-full h-full text-5xl font-bold hover:btn-secondary peer-checked:btn-secondary`}> 
               Clock In
             </label>
           </div>
 
-          <div id="clock-out-button" className="w-full p-2">
+          <div id="clock-out-button" className="w-full p-4">
             <input
               type="radio"
               id="status_clock_out"
@@ -82,14 +82,14 @@ export default function ClockInOutForm() {
               className="peer opacity-0 fixed w-0"/>
             <label
               htmlFor="status_clock_out"
-              className={`${clock_in_out_form_styles['status-radio-label']} p-[8rem] border-0 rounded-lg border-iuc-green text-5xl text-center flex items-center bg-iuc-blue justify-center w-full h-full peer-checked:bg-iuc-yellow`}> 
+              className={`${clock_in_out_form_styles['status-radio-label']} btn w-full h-full text-5xl font-bold hover:btn-secondary peer-checked:btn-secondary`}> 
               Clock Out
             </label>
           </div>
         </div>
 
-        <div id="submit-button">
-         <button type="submit" className="h-[3rem] w-full font-bold rounded">
+        <div id="submit-button" className="w-full h-full p-4">
+         <button type="submit" className="btn btn-primary w-full text-2xl font-bold">
            Submit
          </button>
         </div>
