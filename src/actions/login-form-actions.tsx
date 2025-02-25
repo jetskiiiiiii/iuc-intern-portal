@@ -1,6 +1,6 @@
 'use server'
 
-import LoginEntry from "../lib/interface"
+import { LoginEntry } from "../lib/interface"
 
 import { revalidatePath } from "next/cache"
 import { redirect } from "next/navigation"
