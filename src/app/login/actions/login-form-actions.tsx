@@ -1,16 +1,18 @@
 'use server'
 
-import { LoginEntry } from "../lib/interface"
+import { LogInEntry, SignUpEntry } from "@/lib/interface"
 
 import { revalidatePath } from "next/cache"
 import { redirect } from "next/navigation"
 
 import { createClient } from "@/utils/supabase/server"
 
-export async function login(formData: FormData) {
+// TODO: fix error handling (invalid login credentials, password rule)
+
+export async function loginAction(formData: FormData) {
   const supabase = await createClient()
 
-  const data: LoginEntry = {
+  const data: LogInEntry = {
     email: formData.get("email") as string,
     password: formData.get("password") as string,
   }
@@ -23,15 +25,20 @@ export async function login(formData: FormData) {
   }
 
   revalidatePath('/', 'layout')
-  redirect('/')
+  redirect('/dashboard')
 }
 
+// signup function not used 
 export async function signup(formData: FormData) {
   const supabase = await createClient()
 
-  const data: LoginEntry = {
+  const data: SignUpEntry = {
     email: formData.get("email") as string,
     password: formData.get("password") as string,
+    username: formData.get("username") as string,
+    last_name: formData.get("last_name") as string,
+    first_name: formData.get("first_name") as string,
+    phone_number: formData.get("phone_number") as string,
   }
 
   const { error } = await supabase.auth.signUp(data)

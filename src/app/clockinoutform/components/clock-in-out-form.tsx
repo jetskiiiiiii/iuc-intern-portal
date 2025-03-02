@@ -3,6 +3,8 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { redirect } from "next/navigation";
+import { createClient } from "@/utils/supabase/server";
 
 import { submitEntryAction } from "../actions/clock-in-out-form-actions";
 import clock_in_out_form_styles from "../ui/clock-in-out-form.module.css";

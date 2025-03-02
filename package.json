@@ -16,7 +16,8 @@
     "postcss": "^8.5.3",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
-    "tailwindcss": "^4.0.7"
+    "tailwindcss": "^4.0.7",
+    "unique-username-generator": "^1.4.0"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",

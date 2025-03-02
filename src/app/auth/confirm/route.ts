@@ -8,6 +8,8 @@ export async function GET(request: NextRequest) {
   const { searchParams } = new URL(request.url)
   const token_hash = searchParams.get('token_hash')
   const type = searchParams.get('type') as EmailOtpType | null
+
+  // the next parameter is the url that the user intends to go to before they were directed for auth confirmation
   const next = searchParams.get('next') ?? '/'
 
   const redirectTo = request.nextUrl.clone();
