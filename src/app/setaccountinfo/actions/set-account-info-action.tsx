@@ -7,14 +7,16 @@ import { revalidatePath } from "next/cache"
 import { redirect } from "next/navigation"
 
 export default async function setAccountInfoAction(formData: FormData) {
-  const supabase = createClient()
+  const supabase = await createClient()
+
   const { data: authData, error: authError } = await supabase.auth.getUser()
   if (authError || !authData?.user) {
     redirect("/")
   }
+
   
   const accountInfo : SetAccountInfoEntry = {
-    id: authData.user.id, 
+    user_ID: authData.user.id, 
     firstName: formData.get("firstName") as string,
     lastName: formData.get("lastName") as string,
     username: formData.get("username") as string,
