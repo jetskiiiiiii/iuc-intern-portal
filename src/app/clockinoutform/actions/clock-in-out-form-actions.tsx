@@ -3,6 +3,28 @@
 import { createClient } from "@/utils/supabase/server";
 import { ClockInEntry, ClockOutEntry } from "@/lib/interface";
 
+export async function getClockInStatusAction() {
+  const supabase = await createClient()
+
+  const { data: authData, error: authError } = await supabase.auth.getUser()
+  if (authError) {
+    throw authError
+  }
+
+  const { data: statusData, error: statusError } = await supabase
+    .from("clock-in-out-entry")
+    .select("row_ID, is_clocked_in")
+    .eq("user_ID", authData.user.id)
+    .eq("is_clocked_in", true)
+  if (statusError) {
+    throw statusError
+  }
+
+  // If query returns nothing, user has not clocked in
+  return (statusData.length == 0 ? ['', false]: [statusData[0].row_ID, true])
+
+}
+
 export async function clockInAction(timeClockedIn: Date) {
   const supabase = await createClient()
 
