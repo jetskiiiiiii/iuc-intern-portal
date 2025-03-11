@@ -1,6 +1,6 @@
-import { redirect } from "next/navigation";
-
 import { createClient } from "@/utils/supabase/server";
+import { redirect } from "next/navigation";
+import ClockInOutForm from "../clockinoutform/components/clock-in-out-form";
 
 export default async function Dashboard() {
   const supabase = await createClient()
@@ -11,7 +11,19 @@ export default async function Dashboard() {
     redirect('/login')
   }
 
+  const { data:userData, error:userError } = await supabase
+    .from("profiles")
+    .select()
+    .eq('id', data.user.id)
+
+  if (userError) {
+    throw new Error(userError.message)
+  }
+
   return (
-    <p>Hello</p>
+    <section>
+      <p>Hello {userData[0].username}</p>
+      <ClockInOutForm />
+    </section>
   )
 }

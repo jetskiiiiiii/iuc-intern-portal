@@ -10,3 +10,5 @@ Todo:
     - set password that users can use to login
     - if users try to login without being invited, tell them to send email to iuc intern email
 - delete /private
+- error handling for passwords
+- /setaccountinfo should update if info exists, not insert

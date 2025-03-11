@@ -1,4 +1,6 @@
-import { loginAction } from "../actions/login-form-actions"
+import { loginAction} from "../actions/login-action"
+
+// TODO: Add a 'forget password' function
 
 export default function LoginForm() {
   return (
