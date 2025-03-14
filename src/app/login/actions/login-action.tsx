@@ -6,7 +6,7 @@ import { createClient } from "@/utils/supabase/server"
 import { revalidatePath } from "next/cache"
 import { redirect } from "next/navigation"
 
-export async function loginAction(formData: FormData) {
+export default async function loginAction(prevState: { message: string }, formData: FormData) {
   const supabase = await createClient()
 
   const data: LogInEntry = {
@@ -14,15 +14,14 @@ export async function loginAction(formData: FormData) {
     password: formData.get("password") as string,
   }
 
-  const { error } = await supabase.auth.signInWithPassword(data)
+  const { error: signInError } = await supabase.auth.signInWithPassword(data)
 
-  if (error) {
-    throw new Error(error.message)
-    redirect('/error')
+  if (signInError) {
+    const errorMessage = signInError.code as string
+    return { message: errorMessage }
   }
 
   revalidatePath('/', 'layout')
   redirect('/clockinoutform')
-  // redirect('/dashboard')
 }
 
