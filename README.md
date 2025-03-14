@@ -17,3 +17,5 @@ RESOURCES:
 https://asharibali.medium.com/building-a-stop-watch-app-with-next-js-1127c23085a2
 https://mdobekidis.medium.com/timer-sync-across-clients-with-supabase-realtime-and-reactjs-6ca3c7730d66
 https://github.com/orgs/supabase/discussions/4400
+https://github.com/vercel/next.js/blob/canary/examples/next-forms/app/add-form.tsx
+https://react.dev/reference/react/useActionState
