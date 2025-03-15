@@ -1,19 +1,59 @@
 .page-body {
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
+  height: 100%;
   margin: 0;
+  justify-content: center;
+  align-items: center;
 }
 
 .page-title {
   width: 100%; /* Full width */
-  height: 8rem;
-  display: flex;
-  align-items: center;
-  padding-left: 0.5rem;
-  font-size: 8rem;
+  height: 13vh;
+  padding: 0 1vh;
+  font-size: 10vh;
   font-weight: 500;
-  font-stretch:ultra-expanded;
   color: var(--color-neutral-content);
 }
 
+/* For the container of the form */
+.iuc-form-parent {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+}
+
+/* For the actual form */
+.iuc-form-child {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding: 1vh; /* Assuming p-4 equals 4 * 0.25rem = 1rem */
+  gap: 1vh; /* Assuming gap-5 equals 5 * 0.25rem = 1.25rem */
+}
+
+.iuc-form-input {
+  width: 100%;
+  background-color: transparent; 
+  border: none;
+  padding: 0 1vh;
+  flex-basis: 100%;
+  font-size: 8vh;
+  font-weight: bold;
+  outline: none; 
+}
+
+.iuc-form-input:focus {
+  outline: none;
+}
+
+.iuc-button-primary {
+  font-weight: bold; 
+  font-size: 4vh; 
+  height: 5vh;
+}

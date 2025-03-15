@@ -1,3 +1,5 @@
+"use client" 
+
 import SetAccountInfoForm from "./components/set-account-info-form"
 import "@/app/globals.css"
 import iuc_styles from "@/components/ui/iuc-intern-portal.module.css"

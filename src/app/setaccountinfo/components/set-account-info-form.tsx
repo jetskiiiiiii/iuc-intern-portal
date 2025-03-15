@@ -1,17 +1,17 @@
+"use client"
+
 import setAccountInfoAction from "../actions/set-account-info-action"
-
-import { createClient } from "@/utils/supabase/server";
-import { redirect } from "next/navigation";
+import getUserDataForClient from "@/components/helpers/get-user-data-for-client";
 import { uniqueNamesGenerator, Config, colors, animals, NumberDictionary} from "unique-names-generator"
+import { useActionState, useEffect, useState } from "react";
+import iuc_styles from "@/components/ui/iuc-intern-portal.module.css"
 
-export default async function SetAccountInfoForm() {
-  const supabase = await createClient()
-
-  const { data, error } = await supabase.auth.getUser()
-  if ( error || !data?.user ) {
-    redirect("/")
+export default function SetAccountInfoForm() {
+  const { userData, authError } = getUserDataForClient()
+  if (authError) {
+    throw authError
   }
-
+  
   const numberDictionary = NumberDictionary.generate({ min: 100, max: 999 });
   const config: Config = {
     dictionaries: [colors, animals, numberDictionary],
@@ -21,29 +21,47 @@ export default async function SetAccountInfoForm() {
   }
   const randomeUsername = uniqueNamesGenerator(config) 
 
+  // useState must be used to keep input value controlled
+  const [ userEmail, setUserEmail ] = useState<string | null>(userData?.email || null)
+
+  useEffect(() => {
+    setUserEmail(userData?.email || null)
+  }, [userData])
+
+  const initialState = {
+    message: "Create a password"
+  }
+  // Using useActionState hook to handle login errors
+  const [ state, formAction ] = useActionState(setAccountInfoAction, initialState) 
+
   return (
-    <section>
-      <form>
-        <label htmlFor="password">Set A Password</label>
-        <input id="password" name="password" type="password" required />
+    <div className={iuc_styles["iuc-form-parent"]}>
+      <form action={formAction} id="set-account-info-form" className={iuc_styles["iuc-form-child"]}>
 
-        <label htmlFor="firstName">First Name</label>
-        <input id="firstName" name="firstName" type="text" required />
+        <input id="firstName" name="firstName" type="text" placeholder="First name" required
+          className={iuc_styles["iuc-form-input"]} />
+
+        <input id="lastName" name="lastName" type="text" placeholder="Last name" required
+          className={iuc_styles["iuc-form-input"]} />
+
+        <input id="username" name="username" type="text" placeholder="Create a username" value={randomeUsername} readOnly 
+          className={iuc_styles["iuc-form-input"]} />
         
-        <label htmlFor="lastName">Last Name</label>
-        <input id="lastName" name="lastName" type="text" required />
+        <input id="email" name="email" type="text" placeholder="Enter your email address" value={userEmail || ""} readOnly
+          className={iuc_styles["iuc-form-input"]} />
 
-        <label htmlFor="username">Username</label>
-        <input id="username" name="username" type="text" defaultValue={randomeUsername} required />
-        
-        <label htmlFor="email">Email</label>
-        <input id="email" name="email" type="text" value={data.user.email} readOnly />
+        <input id="phoneNumber" name="phoneNumber" type="text" placeholder="Enter your phone number" required
+          className={iuc_styles["iuc-form-input"]} />
 
-        <label htmlFor="phoneNumber">Phone Number</label>
-        <input id="phoneNumber" name="phoneNumber" type="text" required />
+        <input id="password" name="password" type="password" placeholder={state?.message} required
+          className={iuc_styles["iuc-form-input"]} />
 
-        <button formAction={setAccountInfoAction}>Save Info</button>
+        <button
+          className={`btn btn-primary ${iuc_styles["iuc-button-primary"]}`}>
+          Save Info
+        </button>
+
       </form>
-    </section>
+    </div>
   )
 }

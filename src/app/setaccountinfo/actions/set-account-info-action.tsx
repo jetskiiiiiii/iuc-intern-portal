@@ -6,14 +6,13 @@ import { createClient } from "@/utils/supabase/server"
 import { revalidatePath } from "next/cache"
 import { redirect } from "next/navigation"
 
-export default async function setAccountInfoAction(formData: FormData) {
+export default async function setAccountInfoAction(prevState: { message: string }, formData: FormData) {
   const supabase = await createClient()
 
   const { data: authData, error: authError } = await supabase.auth.getUser()
   if (authError || !authData?.user) {
     redirect("/")
   }
-
   
   const accountInfo : SetAccountInfoEntry = {
     user_ID: authData.user.id, 
@@ -28,14 +27,16 @@ export default async function setAccountInfoAction(formData: FormData) {
     .from("profiles")
     .insert(accountInfo)
   if (insertError) {
-    throw new Error(insertError.message)
+    const errorMessage = insertError.code as string
+    return { message: errorMessage }
   }
 
   const { data: passwordData, error: passwordError } = await supabase.auth.updateUser({
     password: formData.get("password") as string,
   })
   if (passwordError) {
-    throw new Error(passwordError.message)
+    const errorMessage = passwordError.code as string
+    return { message: errorMessage }
   }
   
   revalidatePath("/", "layout")
