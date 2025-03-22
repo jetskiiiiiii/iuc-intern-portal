@@ -1,18 +1,14 @@
 "use client";
 
+import NavBar from "../navbar/components/navbar";
 import ClockInOutForm from "./components/clock-in-out-form";
-import SignOutButton from "../signout/components/signout-button";
 import iuc_styles from "@/components/ui/iuc-intern-portal.module.css"
 
-export default function Page() {
+export default function ClockInOut() {
   return (
-    <main className={`${iuc_styles['page-body']}`}>
-        <div className={`${iuc_styles["page-title"]}`}>
-          <h1>Clock In/Out</h1>
-          <SignOutButton />
-        </div>
-
-        <ClockInOutForm />  
+    <main className={iuc_styles["page-body"]}>
+      <NavBar pageTitle="Clock In/Out"/>
+      <ClockInOutForm />  
     </main>
   );
 }

@@ -25,3 +25,7 @@ export interface SetAccountInfoEntry {
   email: string;
   phoneNumber: string;
 }
+
+export interface NavBarTypes {
+  pageTitle: string
+}

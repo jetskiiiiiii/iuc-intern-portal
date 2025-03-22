@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { clockInAction, clockOutAction, getClockInStatusAction } from "../actions/clock-in-out-form-actions";
+import iuc_styles from "@/components/ui/iuc-intern-portal.module.css"
 
 export default function ClockInOutForm() {
   // State to manage whether user is clocked in.
@@ -90,7 +91,7 @@ export default function ClockInOutForm() {
   }
 
   return (
-      <div id="submit-button" className="w-full h-[84vh] flex justify-center items-center py-4 px-8">
+      <div className={`${iuc_styles["iuc-form-parent"]} p-4`}>
         <button
           onClick={isClockedIn ? handleClockOut : handleClockIn}
           className={`btn w-full h-full text-6xl font-bold border-0 transition-colors duration-200
