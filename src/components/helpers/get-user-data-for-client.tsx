@@ -4,7 +4,7 @@ import { useEffect, useState } from "react"
 import { createClient } from "@/utils/supabase/client"
 import { User, AuthError } from "@supabase/supabase-js"
 
-export default function getUserDataForClient() {
+export default function useUserDataForClient() {
   const [ userData, setUserData ] = useState<User | null>(null)
   const [ authError, setAuthError ] = useState<AuthError | null>(null)
   const supabase = createClient()

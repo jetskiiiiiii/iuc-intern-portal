@@ -1,13 +1,13 @@
 "use client"
 
 import setAccountInfoAction from "../actions/set-account-info-action"
-import getUserDataForClient from "@/components/helpers/get-user-data-for-client";
+import useUserDataForClient from "@/components/helpers/get-user-data-for-client";
 import { uniqueNamesGenerator, Config, colors, animals, NumberDictionary} from "unique-names-generator"
 import { useActionState, useEffect, useState } from "react";
 import iuc_styles from "@/components/ui/iuc-intern-portal.module.css"
 
 export default function SetAccountInfoForm() {
-  const { userData, authError } = getUserDataForClient()
+  const { userData, authError } = useUserDataForClient()
   if (authError) {
     throw authError
   }
