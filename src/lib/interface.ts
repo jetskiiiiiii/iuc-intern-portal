@@ -18,7 +18,7 @@ export interface LogInEntry {
 }
 
 export interface SetAccountInfoEntry {
-  user_ID: string,
+  user_ID: string;
   firstName: string;
   lastName: string;
   username: string;
@@ -27,5 +27,6 @@ export interface SetAccountInfoEntry {
 }
 
 export interface NavBarTypes {
-  pageTitle: string
+  pageTitle: string;
+  showSignOut: boolean;
 }

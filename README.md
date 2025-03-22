@@ -10,11 +10,12 @@ x create login form (multi-step form)
     - set password that users can use to login
     - if users try to login without being invited, tell them to send email to iuc intern email
 x delete /private
-- error handling for forms 
 x /setaccountinfo should update if info exists, not insert
 - logging in with username / email
 - button for setting account info
 - navbar / header component
+    - make sign out a prop (so it can be hidden on login)
+- form validation
 
 RESOURCES:
 https://asharibali.medium.com/building-a-stop-watch-app-with-next-js-1127c23085a2

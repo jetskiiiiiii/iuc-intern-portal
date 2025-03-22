@@ -11,7 +11,7 @@ export default function Home() {
 
   return (
     <main className={iuc_styles["page-body"]}>
-      <NavBar pageTitle="IUC Intern Portal" />
+      <NavBar pageTitle="IUC Intern Portal" showSignOut={false}/>
       <LoginForm />
       <div id="not-an-intern-info" className="w-[40vw] my-2 flex flex-row justify-center items-center bg-info-content rounded-md">
         <h1 className="font-bold text-[1vw] py-[0.5vw] px-[0.1vw]">Not an intern?</h1>

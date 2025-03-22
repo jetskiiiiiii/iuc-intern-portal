@@ -9,7 +9,7 @@ export default function NavBar(props: NavBarTypes) {
     <div className={iuc_styles["page-navbar"]}>
       <h1 className={iuc_styles["page-title"]}>{props.pageTitle}</h1>
       <div className={iuc_styles["page-nav-links"]}>
-        <SignOutButton /> 
+        {props.showSignOut ? <SignOutButton /> : ""}
       </div>
     </div>
   )
