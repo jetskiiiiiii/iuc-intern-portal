@@ -1,6 +1,7 @@
 import { useState, useCallback } from "react";
 import iuc_styles from "@/components/ui/iuc-intern-portal.module.css"
 import { FieldSchema } from "@/app/setaccountinfo/actions/set-account-info-schema";
+import { ZodSchema } from "zod";
 
 export default function ValidatedInput ({
   type,
@@ -15,7 +16,7 @@ export default function ValidatedInput ({
   type?: string,
   name?: string,
   wasSubmitted?: boolean,
-  fieldSchema?: FieldSchema,
+  fieldSchema?: ZodSchema<FieldSchema>,
   errors?: string[] | undefined,
   defaultValue?: string,
   placeholder?: string,
