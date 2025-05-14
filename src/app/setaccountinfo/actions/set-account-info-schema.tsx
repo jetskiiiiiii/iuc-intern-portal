@@ -60,3 +60,5 @@ export const accountInfoFormSchema = z.object({
 })
 
 export const accountInfoFormSchemaPartial = accountInfoFormSchema.partial()
+
+export type FieldSchema = z.infer<typeof accountInfoFormSchema>
