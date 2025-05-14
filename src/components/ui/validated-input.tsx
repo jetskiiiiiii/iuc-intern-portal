@@ -1,5 +1,6 @@
 import { useState, useCallback } from "react";
 import iuc_styles from "@/components/ui/iuc-intern-portal.module.css"
+import { z } from "zod";
 
 export default function ValidatedInput ({
   type,
@@ -14,7 +15,7 @@ export default function ValidatedInput ({
   type?: string,
   name?: string,
   wasSubmitted?: boolean,
-  fieldSchema?: any,
+  fieldSchema?: z.ZodSchema<any, any>,
   errors?: string[] | undefined,
   defaultValue?: string,
   placeholder?: string,
@@ -24,10 +25,10 @@ export default function ValidatedInput ({
   const [ touched, setTouched ] = useState<boolean>(false)
 
   const getErrors = useCallback(()=> {
-    const validationResult = fieldSchema.safeParse(value)
-    return validationResult.success
+    const validationResult = fieldSchema?.safeParse(value)
+    return validationResult?.success
       ? [] 
-      : validationResult.error.flatten().formErrors
+      : validationResult?.error.flatten().formErrors
   }, [fieldSchema, value])
 
   const fieldErrors = errors || getErrors()
@@ -49,7 +50,7 @@ export default function ValidatedInput ({
       defaultValue={defaultValue}
       pattern={pattern}/>
     {shouldRenderErrors && (
-      <span className={iuc_styles["iuc-form-input-error"]}>{fieldErrors[0]}</span>
+      <span className={iuc_styles["iuc-form-input-error"]}>{(fieldErrors && fieldErrors[0])}</span>
     )}
   </div>
   )
