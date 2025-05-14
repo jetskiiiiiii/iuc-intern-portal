@@ -102,7 +102,7 @@ export default function SetAccountInfoForm(userData: {userData?: User}) {
         <ValidatedInput
           name="firstName"
           wasSubmitted={isSubmitted}
-          fieldSchema={accountInfoFormSchemaPartial.shape["firstName"]}
+          fieldSchema={accountInfoFormSchema.shape["firstName"]}
           errors={formState.errors?.firstName}
           defaultValue={isSubmitted ? (formState.form?.firstName ?? "") : (firstName ?? "")}
           placeholder="Enter your first name"
