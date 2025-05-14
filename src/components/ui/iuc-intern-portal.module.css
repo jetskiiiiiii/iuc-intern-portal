@@ -28,6 +28,7 @@
   display: flex;
   flex-direction: row;
   justify-content: right;
+  gap: 2vh;
 }
 
 .iuc-sign-out-button {
@@ -50,22 +51,38 @@
 /* For the actual form */
 .iuc-form-child {
   flex-grow: 1;
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: auto;
+  align-items: center;
   width: 100%;
-  padding: 1vh; /* Assuming p-4 equals 4 * 0.25rem = 1rem */
+  padding: 2vh; /* Assuming p-4 equals 4 * 0.25rem = 1rem */
   gap: 1vh; /* Assuming gap-5 equals 5 * 0.25rem = 1.25rem */
+}
+
+.iuc-form-input-parent {
+  width: 100%;  
+  display: flex;
+  position: relative;
 }
 
 .iuc-form-input {
   width: 100%;
   background-color: transparent; 
   border: none;
-  padding: 0 1vh;
   flex-basis: 100%;
   font-size: 8vh;
   font-weight: bold;
   outline: none; 
+}
+
+.iuc-form-input-error {
+  height: 20%;
+  margin: -1vh 0;
+  font-size: 2vh;
+  color: red;
+  position: absolute;
+  min-height: 3vh;
+  bottom: 0;
 }
 
 .iuc-form-input:focus {
@@ -73,7 +90,28 @@
 }
 
 .iuc-button-primary {
+  width: 100%;
   font-weight: bold; 
   font-size: 4vh; 
   height: 5vh;
+  align-items: left;
+  text-align: left;
+}
+
+.forgot-password-button {
+  width: 100%;
+  gap: 3vh;
+  font-size: 4vh; /* 2 * 1rem = 2rem */
+}
+
+.forgot-password-button-parent {
+  width: 100%;
+}
+
+.login-buttons-parent {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  gap: 3vh;
+  margin-top: auto;
 }

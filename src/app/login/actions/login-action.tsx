@@ -1,24 +1,43 @@
 "use server"
 
-import { LogInEntry} from "@/lib/interface"
+import { LogInWithEmailEntry, LogInWithUsernameEntry, PreLoginEntry } from "@/lib/interface"
 
 import { createClient } from "@/utils/supabase/server"
 import { revalidatePath } from "next/cache"
 import { redirect } from "next/navigation"
 
-export default async function loginAction(prevState: { message: string }, formData: FormData) {
+export default async function loginAction(
+  _prevState: PreLoginEntry,
+  formData: FormData
+): Promise<PreLoginEntry> {
   const supabase = await createClient()
 
-  const data: LogInEntry = {
-    email: formData.get("email") as string,
-    password: formData.get("password") as string,
+  // Form doesn't need to be sent back since we assume credentials are invalid
+  const form = Object.fromEntries(formData)
+  const { email, password } = form
+
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+  if (!emailRegex.test(email as string)) {
+    return {
+      errors: {
+        email: ["Please enter a valid email address"]
+      } 
+    }
+  }
+
+  // Supabase has no 'sign in with username' functionality
+  const data: LogInWithEmailEntry = {
+    email: email as string,
+    password: password as string,
   }
 
   const { error: signInError } = await supabase.auth.signInWithPassword(data)
-
   if (signInError) {
-    const errorMessage = signInError.code as string
-    return { message: errorMessage }
+    const errorMessage = signInError.message as string
+    const errorCode = signInError.code as string
+    return {
+      dbError: errorMessage
+    }
   }
 
   revalidatePath('/', 'layout')

@@ -13,9 +13,10 @@ x delete /private
 x /setaccountinfo should update if info exists, not insert
 - logging in with username / email
 - button for setting account info
-- navbar / header component
-    - make sign out a prop (so it can be hidden on login)
+x navbar / header component
+    x make sign out a prop (so it can be hidden on login)
 - form validation
+- more comprehensive auth error handling
 
 RESOURCES:
 https://asharibali.medium.com/building-a-stop-watch-app-with-next-js-1127c23085a2
@@ -24,6 +25,11 @@ https://github.com/orgs/supabase/discussions/4400
 https://github.com/vercel/next.js/blob/canary/examples/next-forms/app/add-form.tsx
 https://react.dev/reference/react/useActionState
 https:/https://stackoverflow.com/questions/23389098/fill-remaining-vertical-space-only-css/www.reddit.com/r/Supabase/comments/1bzjkr2/recommended_approach_to_accessing_user_data_in/
+https://www.reddit.com/r/nextjs/comments/1ezremq/what_is_the_best_way_to_handle_forms/
+https://stackoverflow.com/questions/74193093/zod-validation-for-phone-numbers
+https://dev.to/bookercodes/nextjs-form-validation-on-the-client-and-server-with-zod-lbc
+https://colinhacks.com/essays/reasonable-email-regex
+https://stackoverflow.com/questions/54884488/how-can-i-solve-the-error-ts2532-object-is-possibly-undefined
 
 EMAIL TEMPLATE:
 <!DOCTYPE html>

@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { clockInAction, clockOutAction, getClockInStatusAction } from "../actions/clock-in-out-form-actions";
 import iuc_styles from "@/components/ui/iuc-intern-portal.module.css"
+import { User } from "@supabase/supabase-js";
 
 export default function ClockInOutForm() {
   // State to manage whether user is clocked in.
@@ -20,7 +21,6 @@ export default function ClockInOutForm() {
       setHoursWorked(status[1] as number)
       setIsClockedIn(status[2] as boolean)
     }
-
     getClockInStatus()
   }, [])
 
@@ -41,13 +41,11 @@ export default function ClockInOutForm() {
     const loadClockInStatus = setTimeout(() => {
       setIsHidden(false)
     }, 400)
-
     return () => clearTimeout(loadClockInStatus)
   })
 
   const handleClockIn = async () => {
     setIsClockedIn(true)
-
     const timeClockedIn = new Date();
     setRowID(await clockInAction(timeClockedIn))
   }
@@ -55,7 +53,6 @@ export default function ClockInOutForm() {
   const handleClockOut = async () => {
     setIsClockedIn(false)
     setHoursWorked(0)
-
     const timeClockedOut = new Date();
     await clockOutAction(rowID, timeClockedOut)
   }
@@ -63,7 +60,6 @@ export default function ClockInOutForm() {
   const seconds = Math.floor((hoursWorked / 1000) % 60)
   const minutes = Math.floor((hoursWorked / 60000) % 60)
   const hours = Math.floor(hoursWorked / 3600000)
-
   const stopwatch = `${hours > 0 ? `${hours}:` : ""}${minutes.toString().padStart(2, "0")}:${seconds.toString().padStart(2, "0")}`
 
   const renderStopwatch = () => {
@@ -78,7 +74,6 @@ export default function ClockInOutForm() {
 
   const renderButtonColors = () => {
     let color: string
-
     if (isHovered && isClockedIn) {
       color = "btn-error"
     } else if (isClockedIn) {
@@ -86,7 +81,6 @@ export default function ClockInOutForm() {
     } else {
       color = "btn-primary"
     }
-
     return color
   }
 

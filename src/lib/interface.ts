@@ -12,13 +12,17 @@ export interface HoursWorkedEntry {
   hoursWorked: number;
 }
 
-export interface LogInEntry {
+export interface LogInWithEmailEntry {
   email: string;
   password: string;
 }
 
+export interface LogInWithUsernameEntry {
+  username: string;
+  password: string;
+}
+
 export interface SetAccountInfoEntry {
-  user_ID: string;
   firstName: string;
   lastName: string;
   username: string;
@@ -26,7 +30,75 @@ export interface SetAccountInfoEntry {
   phoneNumber: string;
 }
 
+export interface SetAccountInfoEntryProps {
+  type: string;
+  placeholder: string;
+  name: ValidFieldNames;
+
+}
+
+export type ValidFieldNames = 
+  | "firstName"
+  | "lastName"
+  | "username"
+  | "email"
+  | "phoneNumber"
+  | "password"
+
+
+export interface PreSetAccountInfoEntry {
+  form?: {
+    firstName?: string;
+    lastName?: string;
+    username?: string;
+    email?: string;
+    phoneNumber?: string;
+    password?: string;
+  }
+  errors?: {
+    firstName?: string[];
+    lastName?: string[];
+    username?: string[];
+    email?: string[];
+    phoneNumber?: string[];
+    password?: string[];
+  }
+  dbError?: string;
+}
+
+export interface UsernameEntry {
+  username: string;
+}
+
 export interface NavBarTypes {
-  pageTitle: string;
-  showSignOut: boolean;
+  pageTitle?: string;
+  showAccount?: boolean;
+  showSignOut?: boolean;
+  showClockIn?: boolean;
+}
+
+// emailError for invalid email format
+export interface PreLoginEntry {
+  form?: {
+    email?: string;
+    username?: string;
+    password?: string;
+  }
+  errors?: {
+    email?: string[];
+    username?: string[];
+    password?: string[];
+  }
+  dbError?: string;
+}
+
+export interface PreForgotPasswordEntry {
+  form?: {
+    email?: string;
+  }
+  errors?: {
+    email?: string[];
+  }
+  dbError?: string;
+  success?: boolean;
 }

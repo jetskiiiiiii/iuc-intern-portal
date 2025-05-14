@@ -1,33 +1,64 @@
+"use client"
+
 import loginAction from "../actions/login-action"
 import { useActionState } from "react"
 import iuc_styles from "@/components/ui/iuc-intern-portal.module.css"
-
-// TODO: Add a 'forget password' function
-
-const initialState = {
-  message: "Enter your password"
-}
+import ForgotPasswordButton from "@/components/helpers/forgotPasswordButton"
 
 export default function LoginForm() {
   // Using useActionState hook to handle login errors
-  const [ state, formAction ] = useActionState(loginAction, initialState) 
+  const [ formState, formAction, pending ] = useActionState(loginAction, {}) 
+
+  let loginButtonText: string; 
+  if (pending) {
+    loginButtonText = "Logging in...";
+  } else {
+    loginButtonText = "Log in";
+  }
 
   return (
     <div className={iuc_styles["iuc-form-parent"]}>
-      <form action={formAction} id="login-form" className={iuc_styles["iuc-form-child"]}>
+      <form
+        id="login-form"
+        action={formAction}
+        noValidate
+        className={iuc_styles["iuc-form-child"]}>
 
-        <input id="email" name="email" type="email" placeholder="Enter your email address" required 
-          className={iuc_styles["iuc-form-input"]} />
+        <div className={iuc_styles["iuc-form-input-parent"]}>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            placeholder="Enter your email address"
+            required 
+            className={iuc_styles["iuc-form-input"]} />
+          {(formState.errors?.email && formState.errors?.email?.length > 0) && (
+            <span className={iuc_styles["iuc-form-input-error"]}>{formState.errors?.email[0]}</span>
+          )}
+        </div>
         
-        {/* // TODO: Assumes sign in error is in regards to password. */}
-        <input id="password" name="password" type="password" placeholder={state?.message} required
-          className={`${iuc_styles["iuc-form-input"]}
-                    ${state?.message == "invalid_credentials" ? "" : ""}`}/>
+        <div className={iuc_styles["iuc-form-input-parent"]}>
+          <input
+            type="password"
+            id="password"
+            name="password"
+            placeholder="Enter your password"
+            required
+            className={`${iuc_styles["iuc-form-input"]}`}/>
+          {(formState.dbError ) && (
+            <span className={iuc_styles["iuc-form-input-error"]}>{formState.dbError}</span>
+          )}
+        </div>
 
-        <button 
-          className={`btn btn-primary ${iuc_styles["iuc-button-primary"]}`}>
-          Log In
-        </button>
+        <div className={`${iuc_styles["login-buttons-parent"]}`}>
+          <button 
+            type="submit"
+            aria-disabled={pending}
+            className={`btn btn-primary ${iuc_styles["iuc-button-primary"]}`}>
+            {loginButtonText}
+          </button>
+          <ForgotPasswordButton />
+        </div>
 
       </form>
     </div>
