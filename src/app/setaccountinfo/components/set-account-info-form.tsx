@@ -3,7 +3,7 @@
 import setAccountInfoAction from "../actions/set-account-info-action"
 import generateUsername from "@/components/helpers/generateUsername";
 import { useActionState, useEffect, useState } from "react";
-import { accountInfoFormSchema } from "../actions/set-account-info-schema";
+import { accountInfoFormSchema, accountInfoFormSchemaPartial } from "../actions/set-account-info-schema";
 import iuc_styles from "@/components/ui/iuc-intern-portal.module.css"
 import ValidatedInput from "@/components/ui/validated-input";
 
@@ -102,7 +102,7 @@ export default function SetAccountInfoForm(userData: {userData?: User}) {
         <ValidatedInput
           name="firstName"
           wasSubmitted={isSubmitted}
-          fieldSchema={accountInfoFormSchema.shape["firstName"]}
+          fieldSchema={accountInfoFormSchemaPartial.shape["firstName"]}
           errors={formState.errors?.firstName}
           defaultValue={isSubmitted ? (formState.form?.firstName ?? "") : (firstName ?? "")}
           placeholder="Enter your first name"
