@@ -8,7 +8,7 @@ export default function Error() {
     <main className={iuc_styles["page-body"]}>
       <NavBar pageTitle="Oops! Something went wrong." />
       <div className={`${iuc_styles["iuc-form-parent"]} p-4`}>
-        <Link href={"/clockinoutform"}>
+        <Link href={"/dashboard"}>
           <button 
             type="submit"
             className={`btn btn-primary w-full ${iuc_styles["iuc-button-primary"]}`} >

@@ -1,7 +1,7 @@
 TODO:
 x redirect users to clock in/out form after logging in / signing up
 x change clockinoutform to only be clock in/out button (since user is always known)
-- create dashboard
+x create dashboard
     - where users are redirected if signed in
     - see hours worked
 x create login form (multi-step form)

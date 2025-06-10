@@ -79,5 +79,5 @@ export default async function setAccountInfoAction(
   }
 
   revalidatePath("/")
-  redirect("/clockinoutform")
+  redirect("/dashboard")
 }

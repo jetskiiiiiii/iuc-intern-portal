@@ -41,6 +41,6 @@ export default async function loginAction(
   }
 
   revalidatePath('/', 'layout')
-  redirect('/clockinoutform')
+  redirect('/dashboard')
 }
 
