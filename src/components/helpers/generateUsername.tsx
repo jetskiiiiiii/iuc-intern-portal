@@ -38,7 +38,6 @@ async function runUsernameGenerator(config: Config, supabase: SupabaseClient)  {
  */
 export default async function generateUsername() {
   const supabase = await createClient()
-
   const { data: userData, error: authError } = await supabase.auth.getUser()
   if (authError || !userData?.user) {
     throw authError
@@ -53,16 +52,17 @@ export default async function generateUsername() {
     length: 3,
   }
 
-  let usernameCheck
-  let duplicateCheckData
-  let randomUsername
-  
-  // Generate usernames until a unique one is found
-  do {
-    usernameCheck = await runUsernameGenerator(config, supabase) 
-    duplicateCheckData = usernameCheck.duplicateCheckData
-    randomUsername = usernameCheck.randomUsername
-  } while (duplicateCheckData && duplicateCheckData.length > 0)
+  const randomUsername = uniqueNamesGenerator(config)
+
+//  let usernameCheck
+//  let duplicateCheckData
+//  
+//  // Generate usernames until a unique one is found
+//  do {
+//    usernameCheck = await runUsernameGenerator(config, supabase) 
+//    duplicateCheckData = usernameCheck.duplicateCheckData
+//    randomUsername = usernameCheck.randomUsername
+//  } while (duplicateCheckData && duplicateCheckData.length > 0)
 
   return randomUsername
 }

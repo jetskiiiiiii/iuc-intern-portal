@@ -7,7 +7,7 @@ export default function ClockInOutButton() {
   }
   return (
     <button onClick={handleClick}
-      className={`btn btn-error ${iuc_styles["iuc-sign-out-button"]}`}>
+      className={`btn btn-neutral ${iuc_styles["iuc-sign-out-button"]}`}>
       Clock In/Out 
     </button>
   )

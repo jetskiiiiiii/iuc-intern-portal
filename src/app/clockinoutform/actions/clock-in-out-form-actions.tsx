@@ -64,8 +64,7 @@ export async function clockInAction(timeClockedIn: Date) {
 // Update "clock-out-time" column based on row_ID
 export async function clockOutAction(rowID: string, timeClockedOut: Date) {
   const supabase = await createClient()
-
-  const { error: authError } = await supabase.auth.getUser()
+  const { data: userData, error: authError } = await supabase.auth.getUser()
   if (authError) {
     throw authError
   }
@@ -81,5 +80,34 @@ export async function clockOutAction(rowID: string, timeClockedOut: Date) {
     .eq("row_ID", rowID)
   if (updateError) {
     throw updateError
+  }
+
+  const { data: clockInOutData, error: fetchError } = await supabase
+    .from("clock-in-out-entry")
+    .select(`clock_in_time, clock_out_time`)
+    .eq("row_ID", rowID)
+    .single()
+  if (fetchError) {
+    throw fetchError
+  }
+
+  const clockInTime : Date = new Date(clockInOutData["clock_in_time"])
+  const clockOuTime : Date = new Date(clockInOutData["clock_out_time"])
+  const currentHoursWorked : number = (clockOuTime.getTime() - clockInTime.getTime()) / (1000 * 60 * 60)
+
+  const { data: userHoursData, error: fetchErrorSecond } = await supabase
+    .from("total-hours-worked")
+    .select("total_hours_worked")
+    .eq("user_ID", userData.user?.id)
+  if (fetchErrorSecond) {
+    throw fetchErrorSecond
+  } else {
+    const totalHoursWorked : number = (userHoursData.length === 0 ? 0 : userHoursData[0]["total_hours_worked"]) + currentHoursWorked
+    const { error: upsertError } = await supabase
+      .from("total-hours-worked")
+      .upsert({ "user_ID": userData.user.id, "total_hours_worked": totalHoursWorked}, {onConflict: "user_ID", ignoreDuplicates: false})
+    if (upsertError) {
+      throw upsertError
+    }
   }
 }

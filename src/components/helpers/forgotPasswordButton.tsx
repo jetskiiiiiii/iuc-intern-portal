@@ -13,7 +13,7 @@ export default function ForgotPasswordButton() {
         <button
           type="button"
           onClick={handleClick}
-          className={`btn btn-error ${iuc_styles["forgot-password-button"]}`}>
+          className={`btn btn-neutral ${iuc_styles["forgot-password-button"]}`}>
           Forgot password?
         </button>
     </div>

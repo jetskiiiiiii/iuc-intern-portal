@@ -13,7 +13,9 @@ export default function ForgotPasswordForm() {
   if (pending) {
     submitButtonText = "Confirming...";
   } else if (formState.success) {
-    submitButtonText = "Password reset sent to email!"
+    submitButtonText = "Password reset link sent to email!"
+  } else if (formState.dbError) {
+    submitButtonText = formState.dbError
   } else {
     submitButtonText = "Submit";
   }
@@ -49,7 +51,7 @@ export default function ForgotPasswordForm() {
           </button>
           <button
             onClick={() => {redirect("/")}}
-            className={`btn btn-error ${iuc_styles["forgot-password-button"]}`}>
+            className={`btn btn-neutral ${iuc_styles["forgot-password-button"]}`}>
           Go back
           </button>
         </div>

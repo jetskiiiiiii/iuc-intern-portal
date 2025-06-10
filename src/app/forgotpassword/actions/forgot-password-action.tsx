@@ -21,7 +21,7 @@ export default async function forgotPasswordAction(
     }
   }
 
-  const { error: resetPasswordError } = await supabase.auth.resetPasswordForEmail(email as string, {redirectTo: "/setaccountinfo"})
+  const { data, error: resetPasswordError } = await supabase.auth.resetPasswordForEmail(email as string)
   if (resetPasswordError) {
     const errorMessage = resetPasswordError.message as string
     const errorCode = resetPasswordError.code as string

@@ -12,11 +12,15 @@ x create login form (multi-step form)
 x delete /private
 x /setaccountinfo should update if info exists, not insert
 - logging in with username / email
-- button for setting account info
+x button for setting account info
 x navbar / header component
     x make sign out a prop (so it can be hidden on login)
-- form validation
+x form validation
 - more comprehensive auth error handling
+x field error shows up if automatically populated and touched
+x confirm email if changed
+x make error page
+x check if any email works for forgot pw
 
 RESOURCES:
 https://asharibali.medium.com/building-a-stop-watch-app-with-next-js-1127c23085a2
@@ -30,6 +34,8 @@ https://stackoverflow.com/questions/74193093/zod-validation-for-phone-numbers
 https://dev.to/bookercodes/nextjs-form-validation-on-the-client-and-server-with-zod-lbc
 https://colinhacks.com/essays/reasonable-email-regex
 https://stackoverflow.com/questions/54884488/how-can-i-solve-the-error-ts2532-object-is-possibly-undefined
+https://supabase.com/docs/guides/auth/passwords?queryGroups=language&language=js&queryGroups=flow&flow=pkce#resetting-a-password
+https://www.reddit.com/r/Supabase/comments/1agh2eg/password_recovery_auth_event_is_not_emitted/
 
 EMAIL TEMPLATE:
 <!DOCTYPE html>

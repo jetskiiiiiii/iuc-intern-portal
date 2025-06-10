@@ -10,6 +10,7 @@ import { createClient } from "@/utils/supabase/client";
 import { User } from "@supabase/supabase-js";
 import ForgotPasswordButton from "@/components/helpers/forgotPasswordButton";
 import { useSearchParams } from "next/navigation";
+import { PreSetAccountInfoEntry } from "@/lib/interface";
 
 export default function SetAccountInfoForm(userData: {userData?: User}) {
   // Establish supabase endpoint
@@ -24,9 +25,11 @@ export default function SetAccountInfoForm(userData: {userData?: User}) {
     const data = new FormData(event.currentTarget)
     const form = Object.fromEntries(data)
 
+    console.log(formState.form, form)
     const validateFormResult = accountInfoFormSchemaPartial.safeParse(form)
     if (!validateFormResult.success) {
       event.preventDefault()
+      console.log("h1")
     }
     setIsSubmitted(true)
     setFirstName(formState.form?.firstName ?? "")
@@ -36,7 +39,6 @@ export default function SetAccountInfoForm(userData: {userData?: User}) {
   }
 
   // Get existing user data
-  const [ profileLoaded, setProfileLoaded ] = useState<boolean>(false)
   const [ isNewUser, setIsNewUser ] = useState<boolean>(false)
   const [ firstName, setFirstName ] = useState<string>("")
   const [ lastName , setLastName ] = useState<string>("")
@@ -49,13 +51,14 @@ export default function SetAccountInfoForm(userData: {userData?: User}) {
       const { data, error } = await supabase.from("profiles").select("*")
       if (error) {
         throw error
-      } else if (data && data.length > 0) { // If user exists
+      } else if (data && data.length > 0) { // If user is not new
         const profile = data[0]
-        setFirstName(profile.firstName)
-        setLastName(profile.lastName)
-        setEmail(profile.email)
-        setUsername(profile.username)
-        setPhoneNumber(profile.phoneNumber)
+        setFirstName(profile.firstName as string)
+        setLastName(profile.lastName as string)
+        setEmail(profile.email as string)
+        setUsername(profile.username as string)
+        setPhoneNumber(profile.phoneNumber as string)
+        console.log("Info set")
       } else {
         setIsNewUser(true)
         setEmail(userData?.userData?.email as string)
@@ -64,9 +67,9 @@ export default function SetAccountInfoForm(userData: {userData?: User}) {
         }
         getUsername()
       }
-      setProfileLoaded(true)
     };
     fetchProfile();
+    console.log("Fetched profile")
   }, [supabase, userData])
 
   // Handle generate username button
@@ -79,17 +82,18 @@ export default function SetAccountInfoForm(userData: {userData?: User}) {
   const initialIsResetPassword = searchParams?.get('type') == "recovery"
   const [ resetPassword, setResetPassword ] = useState<boolean>(initialIsResetPassword)
 
-  let saveButtonText: string
+  let saveButtonText: string; 
   if (pending) {
     saveButtonText = "Saving...";
   } else if (isNewUser) {
     saveButtonText = "Create profile";
   } else {
-    saveButtonText = "Save info"
+    saveButtonText = "Save info";
   }
 
+  console.log(firstName)
 
-  return (profileLoaded &&
+  return (
     <div className={iuc_styles["iuc-form-parent"]}>
       <form
         id="set-account-info-form"
@@ -124,7 +128,7 @@ export default function SetAccountInfoForm(userData: {userData?: User}) {
           <input
             id="username"
             name="username"
-            value={username}
+            value={isSubmitted ? formState.form?.username : username}
             readOnly 
             className={
               `${iuc_styles["iuc-form-input"]}

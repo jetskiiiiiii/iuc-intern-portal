@@ -3,7 +3,6 @@
 import { useState, useEffect } from "react";
 import { clockInAction, clockOutAction, getClockInStatusAction } from "../actions/clock-in-out-form-actions";
 import iuc_styles from "@/components/ui/iuc-intern-portal.module.css"
-import { User } from "@supabase/supabase-js";
 
 export default function ClockInOutForm() {
   // State to manage whether user is clocked in.

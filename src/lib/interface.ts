@@ -1,3 +1,5 @@
+import { User } from "@supabase/supabase-js";
+
 export interface ClockInEntry {
   clock_in_time: Date;
   is_clocked_in: boolean;
@@ -64,6 +66,7 @@ export interface PreSetAccountInfoEntry {
     password?: string[];
   }
   dbError?: string;
+  dbSuccess?: string;
 }
 
 export interface UsernameEntry {
@@ -75,6 +78,20 @@ export interface NavBarTypes {
   showAccount?: boolean;
   showSignOut?: boolean;
   showClockIn?: boolean;
+  showDashboard?: boolean;
+}
+
+export interface Profiles {
+  userData?: {
+    email?: string;
+    firstName?: string;
+    lastName?: string;
+    lastUpdated?: string;
+    phoneNumber?: string;
+    row_ID?: string;
+    user_ID?: string;
+    username?: string;
+  }
 }
 
 // emailError for invalid email format

@@ -1,7 +1,6 @@
 import { useState, useCallback } from "react";
 import iuc_styles from "@/components/ui/iuc-intern-portal.module.css"
-import { FieldSchema } from "@/app/setaccountinfo/actions/set-account-info-schema";
-import { ZodEffects, ZodSchema, ZodString } from "zod";
+import { ZodEffects, ZodString } from "zod";
 
 export default function ValidatedInput ({
   type,
@@ -11,32 +10,37 @@ export default function ValidatedInput ({
   errors,
   defaultValue,
   placeholder,
-  pattern,
 }: {
-  type?: string,
-  name?: string,
-  wasSubmitted?: boolean,
-  fieldSchema?: ZodString | ZodEffects<ZodString, string, string>,
-  errors?: string[] | undefined,
-  defaultValue?: string,
-  placeholder?: string,
-  pattern?: string,
+  type: string,
+  name: string,
+  wasSubmitted: boolean,
+  fieldSchema: ZodString | ZodEffects<ZodString, string, string>,
+  errors: string[] | undefined,
+  defaultValue: string,
+  placeholder: string,
 }) {
-  const [ value, setValue ] = useState<string>("")
-  const [ touched, setTouched ] = useState<boolean>(false)
+  const [ value, setValue ] = useState<string>(defaultValue)
 
-  const getErrors = useCallback(()=> {
-    const validationResult = fieldSchema?.safeParse(value)
-    return validationResult?.success
-      ? [] 
-      : validationResult?.error.flatten().formErrors
+  const getErrors = useCallback(() => {
+    const validationResult = fieldSchema.safeParse(value)
+    let errors : string[]
+    if (validationResult.success) {
+      errors = []
+    } else {
+      errors = validationResult?.error.flatten().formErrors
+    }
+    return errors
   }, [fieldSchema, value])
 
-  const fieldErrors = errors || getErrors()
-  const shouldRenderErrors = wasSubmitted || touched || errors 
+  let fieldErrors, shouldRenderErrors
+  if (wasSubmitted) {
+    fieldErrors = errors || getErrors()
+    shouldRenderErrors = wasSubmitted || errors 
+  }
 
-  const handleBlur = () => setTouched(true)
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => setValue(e.currentTarget.value)
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setValue(e.currentTarget.value)
+  }
 
   return (
   <div className={iuc_styles["iuc-form-input-parent"]}>
@@ -44,12 +48,11 @@ export default function ValidatedInput ({
       id={name}
       type={type}
       name={name}
-      onBlur={handleBlur}
       onChange={handleChange}
       placeholder={placeholder}
+      defaultValue={value}
       className={`${iuc_styles["iuc-form-input"]}`}
-      defaultValue={defaultValue}
-      pattern={pattern}/>
+      />
     {shouldRenderErrors && (
       <span className={iuc_styles["iuc-form-input-error"]}>{(fieldErrors && fieldErrors[0])}</span>
     )}

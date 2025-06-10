@@ -1,5 +1,4 @@
 import { createClient } from "@/utils/supabase/server";
-import protectPage from "../login/actions/protect-page";
 import NavBar from "../navbar/components/navbar";
 import ClockInOutForm from "./components/clock-in-out-form";
 import iuc_styles from "@/components/ui/iuc-intern-portal.module.css"
@@ -14,7 +13,7 @@ export default async function ClockInOut() {
 
   return (
     <main className={iuc_styles["page-body"]}>
-      <NavBar pageTitle="Clock In/Out" showAccount={true} showSignOut={true}/>
+      <NavBar pageTitle="Clock In/Out" showDashboard={true} showAccount={true} showSignOut={true}/>
       <ClockInOutForm />
     </main>
   );

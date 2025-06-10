@@ -115,3 +115,26 @@
   gap: 3vh;
   margin-top: auto;
 }
+
+.dashboard {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+}
+
+.dashboard-greeting {
+  padding-bottom: 1vh;
+}
+
+.work-info-panel {
+  display: flex;
+  flex-direction: column;
+  width: 30vw;
+  height: 10vh;
+  justify-content: center;
+  align-items: center;
+}
