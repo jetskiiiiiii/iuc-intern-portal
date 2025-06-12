@@ -20,13 +20,14 @@ export default async function Dashboard() {
   }
 
   const user = userData[0]
+
   return (
     <main className={iuc_styles["page-body"]}>
-      <NavBar pageTitle={`Dashboard`} showClockIn={true} showAccount={true} showSignOut={true}/>
+      <NavBar pageTitle={`Dashboard`} userData={data.user} showClockIn={true} showAccount={true} showSignOut={true}/>
       <div
         className={iuc_styles["dashboard"]}>
         <p
-          className={iuc_styles["dashboard-greeting"]}>Hi, {userData[0].username}</p>
+          className={iuc_styles["dashboard-greeting"]}>Hi, {user.username}</p>
         <WorkInfoPanel userData={user}/>
       </div>
     </main>

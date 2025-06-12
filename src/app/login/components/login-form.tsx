@@ -3,7 +3,8 @@
 import loginAction from "../actions/login-action"
 import { useActionState } from "react"
 import iuc_styles from "@/components/ui/iuc-intern-portal.module.css"
-import ForgotPasswordButton from "@/components/helpers/forgotPasswordButton"
+import ForgotPasswordButton from "@/app/forgotpassword/components/forgotPasswordButton"
+import LogInAsGuestButton from "@/app/loginasguest/components/logInAsGuestButton"
 
 export default function LoginForm() {
   // Using useActionState hook to handle login errors
@@ -57,7 +58,11 @@ export default function LoginForm() {
             className={`btn btn-primary ${iuc_styles["iuc-button-primary"]}`}>
             {loginButtonText}
           </button>
-          <ForgotPasswordButton />
+          <div
+            className={`${iuc_styles["login-buttons-misc-container"]}`}>
+            <LogInAsGuestButton />
+            <ForgotPasswordButton />
+          </div>
         </div>
 
       </form>

@@ -50,7 +50,7 @@ export default function ForgotPasswordForm() {
           {submitButtonText}
           </button>
           <button
-            onClick={() => {redirect("/")}}
+            onClick={() => {redirect("/setaccountinfo")}}
             className={`btn btn-neutral ${iuc_styles["forgot-password-button"]}`}>
           Go back
           </button>

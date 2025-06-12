@@ -13,7 +13,7 @@ export default async function ClockInOut() {
 
   return (
     <main className={iuc_styles["page-body"]}>
-      <NavBar pageTitle="Clock In/Out" showDashboard={true} showAccount={true} showSignOut={true}/>
+      <NavBar pageTitle="Clock In/Out" userData={data.user} showDashboard={true} showAccount={true} showSignOut={true}/>
       <ClockInOutForm />
     </main>
   );

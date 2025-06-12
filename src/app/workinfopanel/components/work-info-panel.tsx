@@ -16,7 +16,12 @@ export default function WorkInfoPanel(userData: Profiles) {
         .select("total_hours_worked")
         .eq("user_ID", userData.userData?.user_ID)
         .single()
-      if (fetchError?.code === "PGRST116") {
+      
+      const errorCode = fetchError?.code
+      const errorMessage = fetchError?.message
+
+      // If new user (will have no hours worked) or if guest
+      if (errorCode === "PGRST116") {
         setTotalHoursWorked(0)
       } else if (fetchError) {
         throw fetchError

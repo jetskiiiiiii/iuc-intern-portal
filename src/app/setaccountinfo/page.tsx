@@ -13,7 +13,7 @@ export default async function SetAccountInfo() {
 
   return (
     <main className={iuc_styles["page-body"]}>
-      <NavBar pageTitle="Set Account Info" showDashboard={true} showClockIn={true} showSignOut={true}/>
+      <NavBar pageTitle="Set Account Info" userData={data.user} showDashboard={true} showClockIn={true} showSignOut={true}/>
       <SetAccountInfoForm userData={data?.user}/>
     </main>
   );

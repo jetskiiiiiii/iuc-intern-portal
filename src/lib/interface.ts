@@ -79,6 +79,7 @@ export interface NavBarTypes {
   showSignOut?: boolean;
   showClockIn?: boolean;
   showDashboard?: boolean;
+  userData?: User;
 }
 
 export interface Profiles {

@@ -8,7 +8,7 @@ import iuc_styles from "@/components/ui/iuc-intern-portal.module.css"
 import ValidatedInput from "@/components/ui/validated-input";
 import { createClient } from "@/utils/supabase/client";
 import { User } from "@supabase/supabase-js";
-import ForgotPasswordButton from "@/components/helpers/forgotPasswordButton";
+import ForgotPasswordButton from "@/app/forgotpassword/components/forgotPasswordButton";
 import { useSearchParams } from "next/navigation";
 
 export default function SetAccountInfoForm(userData: {userData?: User}) {
@@ -44,6 +44,8 @@ export default function SetAccountInfoForm(userData: {userData?: User}) {
   const [ username, setUsername ] = useState<string>("")
   const [ phoneNumber, setPhoneNumber ] = useState<string>("")
 
+  const isGuest = userData.userData?.is_anonymous
+
   useEffect(() => {
     const fetchProfile = async () => {
       const { data, error } = await supabase.from("profiles").select("*")
@@ -64,6 +66,7 @@ export default function SetAccountInfoForm(userData: {userData?: User}) {
         }
         getUsername()
       }
+
       setProfileLoaded(true)
     };
     fetchProfile();
@@ -87,7 +90,6 @@ export default function SetAccountInfoForm(userData: {userData?: User}) {
   } else {
     saveButtonText = "Save info"
   }
-
 
   return (profileLoaded &&
     <div className={iuc_styles["iuc-form-parent"]}>
@@ -130,15 +132,17 @@ export default function SetAccountInfoForm(userData: {userData?: User}) {
               `${iuc_styles["iuc-form-input"]}
               ${iuc_styles["iuc-form-input-parent"]}`
             }/>
-          <button
-            type="button"
-            onClick={handleRegenerateUsername}
-            className={
-              `btn btn-soft
-              ${iuc_styles["iuc-sign-out-button"]}`
-            }>
-          Regenerate username
-          </button>
+          {!isGuest && 
+            <button
+              type="button"
+              onClick={handleRegenerateUsername}
+              className={
+                `btn btn-soft
+                ${iuc_styles["iuc-sign-out-button"]}`
+              }>
+            Regenerate username
+            </button>
+          }
         </div>
         
         {/* TODO: SEND EMAIL VERIFICATION */}
